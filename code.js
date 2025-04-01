@@ -1,9 +1,10 @@
 export const configurazione = {
-  testo: "KELIN",
+  testo: "K",
   dimensione: 0.8,
   interlinea: 0.7,
   allineamento: "centro",
-  percorsoFont: "./assets/InputMonoCondensed-BoldItalic.ttf",
+  percorsoFont: "./assets/Bock-Medium-2.ttf",
+
   mostraTestoSotto: true,
   mostraTestoSopra: false,
 };
@@ -12,18 +13,9 @@ export const configurazione = {
  * Disegna punto
  * Metti qui quello che vuoi disegnare per ogni punto della font!
  *
- * @typedef {Object} Ingredienti
- * @property {number} x - La coordinata x del punto
- * @property {number} y - La coordinata y del punto
- * @property {number} angolo - L'angolo della curva della font in quel punto
- * @property {number} indice - Il numero del punto nella sequenza
- * @property {number} unita - Unita' di misura di riferimento
- * @property {number} volume - Il volume del microfono
- * @property {number} [alpha] - Device orientation alpha angle (z-axis rotation)
- * @property {number} [beta] - Device orientation beta angle (front-to-back tilt)
- * @property {number} [gamma] - Device orientation gamma angle (left-to-right tilt)
+
  *
- * @param {Ingredienti} ingredienti
+ *
  */
 export function disegnaPunto({
   x,
@@ -39,29 +31,36 @@ export function disegnaPunto({
   push();
   translate(x, y);
 
-  noFill();
-  stroke(0);
+  if (indice % 2 == 0) fill("grey");
+  else fill("orange");
+  ellipse(0, 0, sin(frameCount) * 30);
 
-  // Use orientation data to influence color
-  // Map alpha (z-rotation) to hue (0-360)
-  const hue = map(alpha, 0, 360, 0, 360);
+  // rectMode(CENTER);
+  // rect(x, y, volume * 200, 20);
 
-  // Map beta (front-to-back tilt) to saturation (50-100)
-  const saturation = map(abs(beta), 0, 90, 50, 100);
+  // noFill();
+  // stroke(0);
 
-  // Map gamma (left-to-right tilt) to brightness (50-100)
-  const brightness = map(abs(gamma), 0, 90, 50, 100);
+  // // Use orientation data to influence color
+  // // Map alpha (z-rotation) to hue (0-360)
+  // const hue = map(alpha, 0, 360, 0, 360);
 
-  colorMode(HSB, 360, 100, 100);
-  fill(hue, saturation, brightness);
-  noStroke();
+  // // Map beta (front-to-back tilt) to saturation (50-100)
+  // const saturation = map(abs(beta), 0, 90, 50, 100);
 
-  rectMode(CENTER);
-  rotate(frameCount + indice);
+  // // Map gamma (left-to-right tilt) to brightness (50-100)
+  // const brightness = map(abs(gamma), 0, 90, 50, 100);
 
-  // Add slight variation based on device tilt
-  scale(1 + volume * 10 + (abs(gamma) / 90) * 0.5);
-  rect(0, 0, unita / 2);
+  // colorMode(HSB, 360, 100, 100);
+  // fill(hue, saturation, brightness);
+  // noStroke();
+
+  // rectMode(CENTER);
+  // rotate(frameCount + indice);
+
+  // // Add slight variation based on device tilt
+  // scale(1 + volume * 10 + (abs(gamma) / 90) * 0.5);
+  // rect(0, 0, unita / 2);
   pop();
 }
 
@@ -81,8 +80,8 @@ export function impostazioni() {
 export function sotto(disegnaTesto) {
   background(255);
 
-  fill("green");
-  disegnaTesto();
+  // fill("green");
+  // disegnaTesto();
 }
 
 /**
