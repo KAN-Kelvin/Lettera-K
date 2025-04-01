@@ -28,8 +28,11 @@ export function disegnaPunto({
   beta = 0,
   gamma = 0,
 }) {
+  stroke("black");
   push();
   translate(x, y);
+  rotate(frameCount);
+  strokeWeight(6);
 
   if (indice % 2 == 0) fill("grey");
   else fill("orange");
